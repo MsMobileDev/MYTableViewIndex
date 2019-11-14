@@ -12,6 +12,8 @@ import UIKit
 @objcMembers
 public class TableViewIndexController : NSObject {
     
+    public var shouldMoveOnKeyboardAppear: Bool = false
+    
     /// Table index managed by controller.
     public let tableViewIndex = TableViewIndex()
     
@@ -83,7 +85,7 @@ public class TableViewIndexController : NSObject {
     }
     
     @objc private func handleKeyboardNotification(_ note: Notification) {
-        guard let scrollView = scrollView, let parentView = scrollView.superview, let userInfo = note.userInfo else {
+        guard shouldMoveOnKeyboardAppear, let scrollView = scrollView, let parentView = scrollView.superview, let userInfo = note.userInfo else {
             return;
         }
         
